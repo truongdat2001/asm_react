@@ -1,0 +1,51 @@
+[{
+  "_id": {
+    "$oid": "66b5c93d5ded106e0c1a5a8e"
+  },
+  "moneySpending": 250000,
+  "subCategoryId": {
+    "$oid": "66b4e137bf5c55620e597325"
+  },
+  "userId": {
+    "$oid": "66b4dad6bf5c55620e594fc9"
+  },
+  "dateSpending": {
+    "$date": "2024-08-09T00:00:00.000Z"
+  },
+  "note": "mua đồ ăn",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66b5c9665ded106e0c1a5a99"
+  },
+  "moneySpending": 800000,
+  "subCategoryId": {
+    "$oid": "66b5c8c05ded106e0c1a5a4c"
+  },
+  "userId": {
+    "$oid": "66b4dad6bf5c55620e594fc9"
+  },
+  "dateSpending": {
+    "$date": "2024-07-15T00:00:00.000Z"
+  },
+  "note": "ok",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66b5c98e5ded106e0c1a5aa2"
+  },
+  "moneySpending": 1000000,
+  "subCategoryId": {
+    "$oid": "66b5c8b45ded106e0c1a5a46"
+  },
+  "userId": {
+    "$oid": "66b4dad6bf5c55620e594fc9"
+  },
+  "dateSpending": {
+    "$date": "2024-08-05T00:00:00.000Z"
+  },
+  "note": "đóng tiền nhà ",
+  "__v": 0
+}]

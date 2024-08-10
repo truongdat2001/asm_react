@@ -1,0 +1,81 @@
+[{
+  "_id": {
+    "$oid": "66b4e137bf5c55620e597325"
+  },
+  "name": "ăn",
+  "parentCategory": {
+    "$oid": "668177e2eeff93f4daca03dc"
+  },
+  "userId": {
+    "$oid": "66b4dad6bf5c55620e594fc9"
+  },
+  "spending": [
+    {
+      "$oid": "66b5c93d5ded106e0c1a5a8e"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-08T15:16:07.540Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-09T07:46:05.074Z"
+  },
+  "__v": 2,
+  "budget": {
+    "$oid": "66b4e152bf5c55620e59733e"
+  }
+},
+{
+  "_id": {
+    "$oid": "66b5c8b45ded106e0c1a5a46"
+  },
+  "name": "Tiền nhà ",
+  "parentCategory": {
+    "$oid": "668178b0eeff93f4daca03e4"
+  },
+  "userId": {
+    "$oid": "66b4dad6bf5c55620e594fc9"
+  },
+  "spending": [
+    {
+      "$oid": "66b5c98e5ded106e0c1a5aa2"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-09T07:43:48.109Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-09T07:47:26.843Z"
+  },
+  "__v": 1,
+  "budget": {
+    "$oid": "66b5c90a5ded106e0c1a5a74"
+  }
+},
+{
+  "_id": {
+    "$oid": "66b5c8c05ded106e0c1a5a4c"
+  },
+  "name": "Tiền đi chơi",
+  "parentCategory": {
+    "$oid": "668178a6eeff93f4daca03e2"
+  },
+  "userId": {
+    "$oid": "66b4dad6bf5c55620e594fc9"
+  },
+  "spending": [
+    {
+      "$oid": "66b5c9665ded106e0c1a5a99"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-08-09T07:44:00.270Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-09T07:46:46.889Z"
+  },
+  "__v": 1,
+  "budget": {
+    "$oid": "66b5c8d75ded106e0c1a5a5b"
+  }
+}]

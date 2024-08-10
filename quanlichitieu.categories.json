@@ -1,0 +1,44 @@
+[{
+  "_id": {
+    "$oid": "668177e2eeff93f4daca03dc"
+  },
+  "name": "Chi tiêu - sinh hoạt",
+  "__v": 36,
+  "subcategories": [
+    {
+      "$oid": "66b4e137bf5c55620e597325"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "668178a6eeff93f4daca03e2"
+  },
+  "name": "Chi phí phát sinh",
+  "__v": 8,
+  "subcategories": [
+    {
+      "$oid": "66b5c8c05ded106e0c1a5a4c"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "668178b0eeff93f4daca03e4"
+  },
+  "name": "Chi phí cố định",
+  "__v": 15,
+  "subcategories": [
+    {
+      "$oid": "66b5c8b45ded106e0c1a5a46"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "668178c6eeff93f4daca03e6"
+  },
+  "name": "Đầu tư - tiết kiệm",
+  "__v": 3,
+  "subcategories": []
+}]
