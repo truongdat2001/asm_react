@@ -3,13 +3,14 @@ import { CiSquarePlus } from "react-icons/ci";
 import { IoTrash } from "react-icons/io5";
 import { AiFillEdit } from "react-icons/ai";
 import categoriesService from "../../services/categories/categoriesService";
-import { TabUiMainContent } from "../../hooks/useContext/MainTabContext";
 import CreateCategories from "./CreateCategories";
 import { AuthUserContext } from "../../hooks/useContext/AuthContext";
 import CreateBudget from "./CreateBudget";
 import subCategoriesService from "../../services/subCategories/subCategoriesService";
 import { showToastError, showToastSuccess } from "../../config/toastConfig";
 import EditCategories from "./EditCategories";
+import iconImageLogo from '../../assets/images/icon-logo.jpg'
+
 const Budget = () => {
     const [categories, setCategories] = useState([])
     const [detailSubcategories, setDetailCategories] = useState({})
@@ -21,7 +22,6 @@ const Budget = () => {
     const [IdSubCategories, setIdSubCategories] = useState(null)
 
     const [selectedSubCategory, setSelectedSubCategory] = useState(null);
-    const { handleShowContent } = useContext(TabUiMainContent)
 
     const getCategories = async () => {
         const dataCategories = await categoriesService.getCategories()
@@ -30,20 +30,23 @@ const Budget = () => {
             subcategories: category.subcategories.filter(sub => sub.userId === user._id)
         }))
         setCategories(filterCategoris)
+        console.log(filterCategoris);
+        
     }
+
     useEffect(() => {
-        if(!user?._id){
+        if (!user?._id) {
             return showToastError("Đăng nhập để tạo ngân sách chi tiêu")
         }
         getCategories()
     }, [user])
 
-    const getDetailSubCategories = async (id) => { 
+    const getDetailSubCategories = async (id) => {
         setSelectedSubCategory(id)
         const dataSubDetailCategories = await subCategoriesService.getDetailSubCategoriesById(id)
         setDetailCategories(dataSubDetailCategories);
     }
-  console.log(detailSubcategories);
+    console.log(detailSubcategories);
     const handleDetailBudget = () => {
         setShowFormBudget(true)
     }
@@ -56,42 +59,39 @@ const Budget = () => {
         getCategories()
         showToastSuccess(resultDele.message)
     }
-    const handleEditSubCategories = (id)=>{
+    const handleEditSubCategories = (id) => {
         setShowFormEdit(true)
         setIdSubCategories(id)
     }
 
     return (
         <>
-            <div className="relative ">
+            <div className="">
                 {showFormAddBudget && (
-                    <div className="absolute left-[20%] top-[0%] z-20">
+                    <div className="left-[20%] top-[0%] z-20">
                         <CreateBudget handleHideForm={setShowFormBudget} detailSubcategories={detailSubcategories} />
                     </div>
                 )}
                 {showFormAddCategory && (
-                    <div className="absolute left-[20%] top-[5%] z-10">
+                    <div className="left-[20%] top-[5%] z-10">
                         <CreateCategories getCategories={getCategories} categories={categories} handleHideForm={setShowFormAddCategory} />
                     </div>
                 )}
                 {showFormEdit && (
-                    <div className="absolute left-[20%] top-[5%] z-10">
+                    <div className="left-[20%] top-[5%] z-10">
                         <EditCategories getCategories={getCategories} categories={categories} handleHideForm={setShowFormEdit} IdSubCategories={IdSubCategories} />
                     </div>
                 )}
 
-                <div className="flex justify-between gap-5 bg-pink-500 w-full rounded-[5px] p-5" >
+                <div className="flex justify-between gap-5 w-full rounded-[5px] p-5" style={{ background: '#01adf1' }}>
                     <div className="flex gap-2">
                         <div>
                             <span className="text-[20px] block font-bold text-[#fff]">Chọn 1 danh mục chi tiêu</span>
                             <span className="text-[15px] text-[#fff]">Bạn sẽ được thông báo khi chi tiêu <br /> danh mục đạt giới hạn tối đa</span>
                         </div>
                         <div>
-                            <img className="w-[100px]" src="https://is.vnecdn.net/v992/33/13/01/4011333/assets/images/momo-doll.png" alt="" />
+                            <img className="w-[100px]" style={{ borderRadius: '30px' }} src={iconImageLogo} alt="" />
                         </div>
-                    </div>
-                    <div>
-                        <button onClick={() => handleShowContent(1)} className="bg-[#fff] text-pink-500 rounded-[5px] p-2 w-[150px] font-bold">Quay lại</button>
                     </div>
                 </div>
                 <div className="overflow-auto h-[400px]">
@@ -110,25 +110,24 @@ const Budget = () => {
                                     </div>
 
                                     <div className=" flex justify-center gap-3" >
-                                        <IoTrash onClick={() => handleDeleteSubCategories(ChildCategory._id)} className="text-[20px] text-[#CF3D84] cursor-pointer" />
-                                        
-                                        <AiFillEdit onClick={()=>handleEditSubCategories(ChildCategory._id)} className="text-[20px] text-[#CF3D84] cursor-pointer" />
+                                        <IoTrash onClick={() => handleDeleteSubCategories(ChildCategory._id)} className="text-[20px] text-[#01adf1] cursor-pointer" />
+
+                                        <AiFillEdit onClick={() => handleEditSubCategories(ChildCategory._id)} className="text-[20px] text-[#01adf1] cursor-pointer" />
                                     </div>
                                 </div>
                             ))}
                         </div>
                     ))}
-                    <div className="flex justify-center mt-4 items-center gap-2 cursor-pointer border-2 border-[#CF3D84] p-2 rounded-[5px]" onClick={() => setShowFormAddCategory(true)}>
-                        <CiSquarePlus className="text-[25px] text-[#CF3D84]" />
-                        <span className="text-[#CF3D84] font-semibold">Tạo danh mục</span>
+                    <div className="flex justify-center mt-4 items-center gap-2 cursor-pointer border-2 border-[#01adf1] p-2 rounded-[5px]" onClick={() => setShowFormAddCategory(true)}>
+                        <CiSquarePlus className="text-[25px] text-[#01adf1]" />
+                        <span className="text-[#01adf1] font-semibold">Tạo danh mục</span>
                     </div>
                 </div>
-                <div className="absolute  bottom-[-70px] left-[0] w-full flex justify-center"  >
+                <div className="bottom-[-70px] mt-5 left-[0] w-full flex justify-center"  >
                     <button
                         onClick={() => handleDetailBudget()}
                         disabled={selectedSubCategory === null}
-                        className={` w-full text-center  p-2 rounded-[5px] cursor-pointer duration-300 ${selectedSubCategory ? 'bg-[#CF3D84] text-[#fff]' : 'bg-slate-200 text-slate-500'}`}
-
+                        className={` w-full text-center p-2 rounded-[5px] cursor-pointer duration-300 ${selectedSubCategory ? 'bg-[#01adf1] text-[#fff]' : 'bg-slate-200 text-slate-500'}`}
                     >Tiếp tục</button>
                 </div>
             </div >

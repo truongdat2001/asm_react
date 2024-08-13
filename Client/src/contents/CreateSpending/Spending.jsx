@@ -1,5 +1,6 @@
 import { CiSquarePlus } from "react-icons/ci";
 import { useState, useEffect, useContext } from "react";
+import moment from 'moment'
 import CreateSpending from "./CreateSpending";
 import spendingService from '../../services/spending/spendingService';
 import { AuthUserContext } from '../../hooks/useContext/AuthContext';
@@ -7,6 +8,7 @@ import { showToastError, showToastSuccess } from "../../config/toastConfig";
 import { formatCurrency } from "../../config/formatCurrency";
 import UpdateSpending from "./UpdateSpending";
 import subCategoriesService from "../../services/subCategories/subCategoriesService";
+import iconImageLogo from '../../assets/images/icon-logo.jpg'
 
 const Spending = () => {
     const [showFormSpending, setShowFormSpending] = useState(false);
@@ -17,15 +19,15 @@ const Spending = () => {
     const { user } = useContext(AuthUserContext);
 
     const getDataSpending = async () => {
-            const result = await spendingService.getDataSpending(user?._id);
-            setTransactions(result);
-      
+        const result = await spendingService.getDataSpending(user?._id);
+        setTransactions(result);
+
     };
 
     const getSubcate = async () => {
-            const subCate = await subCategoriesService.getSubCategoriesById(user?._id);
-            setSubCategories(subCate);
-      
+        const subCate = await subCategoriesService.getSubCategoriesById(user?._id);
+        setSubCategories(subCate);
+
     };
 
     useEffect(() => {
@@ -33,17 +35,17 @@ const Spending = () => {
             return showToastError("Vui lòng đăng nhập để thực hiện tạo giao dịch")
         }
         getDataSpending();
-            getSubcate();
+        getSubcate();
     }, [user]);
 
     const handleDelete = async (id) => {
         if (!id) {
             return;
-        } 
-            const result = await spendingService.deleteSpending(id);
-            getDataSpending();
-            showToastSuccess(result.message);
- 
+        }
+        const result = await spendingService.deleteSpending(id);
+        getDataSpending();
+        showToastSuccess(result.message);
+
     };
 
     const handleEdit = (id) => {
@@ -67,14 +69,14 @@ const Spending = () => {
                     )}
 
                     <h1 className="text-[30px]">Thêm giao dịch</h1>
-                    <div className="flex justify-between gap-5 bg-pink-500 w-full rounded-[5px] p-5">
+                    <div className="flex justify-between gap-5 bg-[#01adf1] w-full rounded-[5px] p-5">
                         <div className="flex gap-2">
                             <div>
                                 <span className="text-[20px] block font-bold text-[#fff]">Tạo chi tiêu</span>
                                 <span className="text-[15px] text-[#fff]">Bạn sẽ được thông báo khi chi tiêu</span>
                             </div>
                             <div>
-                                <img className="w-[100px]" src="https://is.vnecdn.net/v992/33/13/01/4011333/assets/images/momo-doll.png" alt="Momo Doll" />
+                                <img className="w-[100px]" style={{ borderRadius: "30px" }} src={iconImageLogo} />
                             </div>
                         </div>
                     </div>
@@ -96,7 +98,7 @@ const Spending = () => {
                                     <tr key={transaction._id}>
                                         <td className="border px-4 py-2 text-center">{formatCurrency(transaction.moneySpending)}</td>
                                         <td className="border px-4 py-2 text-center">Giao Dịch</td>
-                                        <td className="border px-4 py-2 text-center">{transaction.dateSpending}</td>
+                                        <td className="border px-4 py-2 text-center">{moment(transaction.dateSpending).format("MM/DD/YYYY")}</td>
                                         <td className="border px-4 py-2 text-center">{transaction.subCategoryId?.name}</td>
                                         <td className="border px-4 py-2 text-center">{transaction.note}</td>
                                         <td className="border px-4 py-2 text-center">
@@ -109,9 +111,9 @@ const Spending = () => {
                         </table>
                     </div>
 
-                    <div onClick={() => setShowFormSpending(true)} className="flex justify-center mt-4 items-center gap-2 cursor-pointer border-2 border-[#CF3D84] p-2 rounded-[5px]">
-                        <CiSquarePlus className="text-[25px] text-[#CF3D84]" />
-                        <span className="text-[#CF3D84] font-semibold">Tạo Giao Dịch Chi Tiêu</span>
+                    <div onClick={() => setShowFormSpending(true)} className="flex justify-center mt-4 items-center gap-2 cursor-pointer border-2 border-[#01adf1] p-2 rounded-[5px]">
+                        <CiSquarePlus className="text-[25px] text-[#01adf1]" />
+                        <span className="text-[#01adf1] font-semibold">Tạo Giao Dịch Chi Tiêu</span>
                     </div>
                 </>
             ) : (

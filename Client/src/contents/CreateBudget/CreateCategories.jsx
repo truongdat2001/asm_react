@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import subCategoriesService from "../../services/subCategories/subCategoriesService";
 import { AuthUserContext } from "../../hooks/useContext/AuthContext";
+import iconImageLogo from '../../assets/images/icon-logo.jpg'
 
 const CreateCategories = (props) => {
   const { handleHideForm, categories , getCategories } = props;
@@ -32,14 +33,15 @@ const CreateCategories = (props) => {
 
   return (
     <>
-      <div className="bg-[rgb(228,228,228)] p-5 rounded-[5px]">
+    <div className="fixed inset-0 cursor-pointer bg-black bg-opacity-50 z-50" onClick={() => handleHideForm(false)}></div>
+      <div className="z-50 fixed top-[30px] left-[30vw] bg-[rgb(228,228,228)] p-5 rounded-[5px]">
         <div className="py-3 flex items-center">
           <img
-            className="w-[200px]"
-            src="https://is.vnecdn.net/v992/33/13/01/4011333/assets/images/momo-doll.png"
+            className="w-[100px]" style={{borderRadius: "30px"}}
+            src={iconImageLogo}
             alt=""
           />
-          <span className="text-[20px]">Tạo danh mục</span>
+          <span className="text-[20px] pl-1"> Tạo danh mục</span>
         </div>
         <div className="bg-[#fff] shadow w-[500px] p-3 rounded-[5px]">
           <div>
@@ -73,7 +75,7 @@ const CreateCategories = (props) => {
               disabled={!nameCategory || !parentCategoryId}
               className={`${
                 nameCategory && parentCategoryId
-                  ? "bg-[#CF3D84] text-[#fff]"
+                  ? "bg-[#01adf1] text-[#fff]"
                   : "bg-slate-200"
               } w-full rounded-[5px] p-2 text-[#b4b4b4] duration-300`}
             >
@@ -83,7 +85,7 @@ const CreateCategories = (props) => {
           <div className="flex justify-center mt-3">
             <button
               onClick={() => handleHideForm(false)}
-              className="bg-[#CF3D84] w-full rounded-[5px] p-2 text-[#fff]"
+              className="bg-red-500 w-full rounded-[5px] p-2 text-[#fff]"
             >
               Hủy
             </button>

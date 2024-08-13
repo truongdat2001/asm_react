@@ -2,27 +2,27 @@ const Category = require('../../model/CategoriesModel')
 const SubCategories = require('../../model/SubCategoriesModel')
 const Budget = require('../../model/BudgetModel')
 const subCategoriesControllers = {
-    getAllSubCategories:async (req,res)=>{
+    getAllSubCategories: async (req, res) => {
         try {
             const subCategories = await SubCategories.find()
             res.status(200).json(subCategories)
         } catch (error) {
-           res.status(500).json({message:error.message});
+            res.status(500).json({ message: error.message });
         }
-       },
-    getDeltailSubCategories:async (req,res)=>{
-     try {
-         const { id } = req.params;
-         if(!id){
-            return res.status(400).json({message:"Không tìm thấy id"})
-         }
-         const subCategoriesDetail = await SubCategories.findById(id)
-         .populate('budget','budget')
-         .populate('spending','moneySpending')
-         res.status(200).json(subCategoriesDetail)
-     } catch (error) {
-        res.status(500).json({message:error.message});
-     }
+    },
+    getDeltailSubCategories: async (req, res) => {
+        try {
+            const { id } = req.params;
+            if (!id) {
+                return res.status(400).json({ message: "Không tìm thấy id" })
+            }
+            const subCategoriesDetail = await SubCategories.findById(id)
+                .populate('budget', 'budget')
+                .populate('spending', 'moneySpending')
+            res.status(200).json(subCategoriesDetail)
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
     },
     getSubCategoriesByUserId: async (req, res) => {
         try {
@@ -32,8 +32,8 @@ const subCategoriesControllers = {
             }
 
             const subCategoriesDetail = await SubCategories.find({ userId })
-            .populate('budget','budget')
-            .populate('spending','moneySpending')
+                .populate('budget', 'budget')
+                .populate('spending', 'moneySpending')
 
 
             res.status(200).json(subCategoriesDetail);
@@ -107,7 +107,7 @@ const subCategoriesControllers = {
         }
     },
     // 
- 
+
 
 }
 module.exports = subCategoriesControllers;

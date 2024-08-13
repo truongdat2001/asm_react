@@ -2,7 +2,9 @@ import { useEffect, useState, useContext } from "react";
 import subCategoriesService from "../../services/subCategories/subCategoriesService";
 import { AuthUserContext } from "../../hooks/useContext/AuthContext";
 import spendingService from "../../services/spending/spendingService";
-import {  showToastSuccess } from "../../config/toastConfig";
+import { showToastSuccess } from "../../config/toastConfig";
+import iconImageLogo from '../../assets/images/icon-logo.jpg'
+
 const CreateSpending = (props) => {
     const { handleHideForm, getDataSpending } = props;
     const { user } = useContext(AuthUserContext);
@@ -22,7 +24,7 @@ const CreateSpending = (props) => {
     }, [])
 
     const handleAddSpending = async () => {
-        if(!user?._id){
+        if (!user?._id) {
             return
         }
         const data = {
@@ -43,14 +45,16 @@ const CreateSpending = (props) => {
 
     return (
         <>
-            <div className="bg-[rgb(228,228,228)] p-5 rounded-[5px]">
-                <div className="py-3 flex items-center">
+            <div className="fixed inset-0 cursor-pointer bg-black bg-opacity-50 z-50" onClick={() => handleHideForm(false)}></div>
+            <div className="z-50 fixed left-[30vw] h-[550px] bg-[rgb(228,228,228)] p-5 pt-0 rounded-[5px]">
+                <div className="py-1 flex items-center">
                     <img
-                        className="w-[150px]"
-                        src="https://is.vnecdn.net/v992/33/13/01/4011333/assets/images/momo-doll.png"
+                        className="w-[100px]"
+                        style={{ borderRadius: "35px" }}
+                        src={iconImageLogo}
                         alt=""
                     />
-                    <span className="text-[20px]">Tạo dao dịch </span>
+                    <span className="text-[20px] pl-1">Tạo chi tiêu </span>
                 </div>
                 <div className="bg-[#fff] shadow w-[500px] p-3 rounded-[5px]">
                     <div>
@@ -59,7 +63,7 @@ const CreateSpending = (props) => {
                             onChange={(e) => setMoneySpending(e.target.value)}
                             type="number"
                             placeholder="Tạo mức giao dịch"
-                            className="block my-2 w-full p-2 rounded-[5px] border-2 border-slate-300 relative"
+                            className="block my-2 w-full h-9 p-2 rounded-[5px] border-2 border-slate-300 relative"
                         />
                     </div>
                     <div>
@@ -67,7 +71,7 @@ const CreateSpending = (props) => {
                         <select
                             name=""
                             id=""
-                            className="block w-full p-2 border-2 border-slate-300 rounded-[5px] my-2"
+                            className="block w-full h-9 p-2 border-2 border-slate-300 rounded-[5px] my-2"
                             onChange={(e) => setSubIdCategoryId(e.target.value)}
                         >
                             <option value="">Chọn danh mục</option>
@@ -81,7 +85,7 @@ const CreateSpending = (props) => {
                     <div>
                         <label htmlFor="">Ngày Tháng</label>
                         <input type="date"
-                            className="block my-2 w-full p-2 rounded-[5px] border-2 border-slate-300 relative"
+                            className="block my-2 w-full h-9 p-2 rounded-[5px] border-2 border-slate-300 relative"
                             onChange={(e) => setDateSpending(e.target.value)}
                         />
                     </div>
@@ -89,7 +93,7 @@ const CreateSpending = (props) => {
                         <label htmlFor="">Ghi Chú</label>
                         <input type="text"
                             placeholder="Ghi chú cho giao dịch"
-                            className="block my-2 w-full p-2 rounded-[5px] border-2 border-slate-300 relative"
+                            className="block my-2 w-full h-9 p-2 rounded-[5px] border-2 border-slate-300 relative"
                             onChange={(e) => setNoteSpending(e.target.value)}
                         />
                     </div>
@@ -98,7 +102,7 @@ const CreateSpending = (props) => {
                             onClick={() => handleAddSpending()}
                             disabled={subIdCategoryId === ""}
                             className={`
-                                   ${subIdCategoryId ? "bg-[#CF3D84] text-[#fff]"
+                                    ${subIdCategoryId ? "bg-[#01adf1] text-[#fff]"
                                     : "bg-slate-200"
                                 } 
                                 w-full rounded-[5px] p-2 text-[#b4b4b4] duration-300`}
@@ -109,7 +113,7 @@ const CreateSpending = (props) => {
                     <div className="flex justify-center mt-3">
                         <button
                             onClick={() => handleHideForm(false)}
-                            className="bg-[#CF3D84] w-full rounded-[5px] p-2 text-[#fff]"
+                            className="bg-red-500 w-full rounded-[5px] p-2 text-[#fff]"
                         >
                             Hủy
                         </button>

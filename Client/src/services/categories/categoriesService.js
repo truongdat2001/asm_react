@@ -1,21 +1,21 @@
 import { http } from "../../utils/http";
 
 const categoriesService = {
-    getCategories:async ()=>{
+    getCategories: async () => {
         try {
-            const {data} = await http.get('/categories')
-             return data
+            const { data } = await http.get('/categories')
+            return data
         } catch (error) {
-             console.log(error);
+            console.log(error);
         }
     },
-    addCategories:async ()=>{
+    addCategories: async () => {
         try {
-            const {data} = await http.post('/categories')
+            const { data } = await http.post('/categories')
             console.log(data);
-             return data
+            return data
         } catch (error) {
-             console.log(error);
+            console.log(error);
         }
     }
 }

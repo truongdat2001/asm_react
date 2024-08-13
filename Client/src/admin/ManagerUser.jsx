@@ -3,22 +3,29 @@ import AuthService from "../services/auth/authService";
 import { useNavigate } from "react-router-dom";
 import { showToastSuccess } from "../config/toastConfig";
 import ManagerSpendingUser from "./ManagerSpendingUser";
+
 const ManagerUser = () => {
-    const [users, allUsers] = useState([])
+    const [users, setUsers] = useState([])
+
     const [showSpendingUser, setShowSpendingUser] = useState(false)
+    
     const [idUserCheck, setIdUserCheck] = useState(null)
 
     const navigate = useNavigate()
+
     useEffect(() => {
         getAllUser()
-    })
+    },[])
+
     const getAllUser = async () => {
         const user = await AuthService.getAllUser();
-        allUsers(user)
+        setUsers(user)
     }
+
     const handleDeleteUser = async (id) => {
         const user = await AuthService.deleteUser(id);
         showToastSuccess(user.message)
+        getAllUser()
     }
 
     const handleCheckUser = (id) => {
@@ -32,9 +39,8 @@ const ManagerUser = () => {
             <div>
                 <div className="p-3 shadow bg-[#fff] m-2 h-dvh rounded-[10px]">
                     <div className="flex justify-between">
-                        <span className="text-[30px] font-bold">Danh Sách Người Dùng</span>
-                        <button onClick={() => navigate('/')} className="text-[20px] font-bold bg-blue-500 text-[#fff] p-2 rounded-[5px]">Qua lại</button>
-
+                        <span className="text-[30px] font-bold">Quản Lý Người Dùng</span>
+                        <button onClick={() => navigate('/')} className="text-[20px] font-bold bg-blue-500 text-[#fff] p-2 rounded-[5px]">Trở lại</button>
                     </div>
                     <div className="overflow-y-auto h-[740px] scrollbar-thin">
                         <table className="w-full"  >
@@ -43,7 +49,7 @@ const ManagerUser = () => {
                                     <th className="text-left px-4">ID</th>
                                     <th className="text-left px-4">Email</th>
                                     <th className="text-left px-4">Tên</th>
-                                    <th className="text-left px-4">Trạng thái </th>
+                                    <th className="text-left px-4">Chức vụ</th>
                                     <th className="pr-5 py-2 " colSpan="10">
                                         Hành động
                                     </th>

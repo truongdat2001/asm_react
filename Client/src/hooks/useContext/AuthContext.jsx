@@ -1,5 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import AuthService from "../../services/auth/authService";
+
+
 export const AuthUserContext = createContext()
 const AuthContext = ({ children }) => {
     const [user, setUser] = useState([])
@@ -16,6 +18,7 @@ const AuthContext = ({ children }) => {
                 const UserData = await AuthService.GetUserData(storeToken ? storeToken : null);
                 if (UserData) {
                     setUser(UserData);
+                    console.log(UserData);
                     return
                 }
             } catch (error) {
@@ -26,7 +29,7 @@ const AuthContext = ({ children }) => {
     }, [])
     return (
         <div>
-            <AuthUserContext.Provider value={{user,token}}>
+            <AuthUserContext.Provider value={{ user, token }}>
                 {children}
             </AuthUserContext.Provider>
         </div>

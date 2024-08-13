@@ -8,7 +8,8 @@ const ChartHome = () => {
     const [nameSubCategories, setNameSubCategories] = useState([]);
     const [series, setSeries] = useState([]);
     const [percentage, setPercentage] = useState([]);
-    const [currentChart, setCurrentChart] = useState('bar'); 
+    const [currentChart, setCurrentChart] = useState('bar');
+    const [loading, setLoading] = useState(true);  // Trạng thái để theo dõi dữ liệu đang tải
 
     const barOptions = {
         chart: { type: 'bar' },
@@ -23,12 +24,12 @@ const ChartHome = () => {
         plotOptions: {
             bar: {
                 horizontal: false,
-                columnWidth: '55%',
+                columnWidth: '10%',
                 endingShape: 'rounded'
             }
         },
         theme: { monochrome: { enabled: false } },
-        colors: ['#EC4899']
+        colors: ['#53ec48']
     };
 
     const pieOptions = {
@@ -47,6 +48,7 @@ const ChartHome = () => {
     };
 
     const getDataSubCategories = async () => {
+        setLoading(true);
         try {
             const datas = await subCategoriesService.getSubCategoriesById(user?._id);
             const validSubCategories = datas.filter(subcategory => subcategory.budget?.budget != null);
@@ -55,18 +57,19 @@ const ChartHome = () => {
                 setNameSubCategories([]);
                 setSeries([]);
                 setPercentage([]);
-                return;
+            } else {
+                const getNameSubCategories = validSubCategories.map(subcategory => subcategory.name);
+                const getBudgetSubCategories = validSubCategories.map(subcategory => subcategory.budget.budget);
+
+                setNameSubCategories(getNameSubCategories);
+                setSeries(getBudgetSubCategories);
             }
-
-            const getNameSubCategories = validSubCategories.map(subcategory => subcategory.name);
-            const getBudgetSubCategories = validSubCategories.map(subcategory => subcategory.budget.budget);
-
-            setNameSubCategories(getNameSubCategories);
-            setSeries(getBudgetSubCategories);
         } catch (error) {
             console.error("Error fetching subcategories: ", error);
+        } finally {
+            setLoading(false); // Hoàn tất tải dữ liệu
         }
-    }
+    };
 
     useEffect(() => {
         if (user?._id) {
@@ -88,21 +91,25 @@ const ChartHome = () => {
 
     return (
         <>
-            {series.length === 0 ? (
+            {loading ? (
                 <div className='flex justify-center items-center'>
-                    <span className='text-[25px]'>Hiện tại chưa có dữ liệu vui lòng thêm chi tiêu và ngân sách</span>
+                    <span className='text-[25px]'>Đang tải dữ liệu...</span>
+                </div>
+            ) : series.length === 0 ? (
+                <div className='flex justify-center items-center'>
+                    <span className='text-[25px]'>Hiện tại chưa có dữ liệu, vui lòng thêm chi tiêu và ngân sách.</span>
                 </div>
             ) : (
                 <>
                     <div className="flex justify-center mb-4">
                         <button
-                            className={`px-4 py-2 mr-2 rounded-md ${currentChart === 'bar' ? 'bg-pink-500 text-white' : 'bg-gray-300 text-black'}`}
+                            className={`px-4 py-2 mr-2 rounded-md ${currentChart === 'bar' ? 'bg-[#01adf1] text-white' : 'bg-gray-300 text-black'}`}
                             onClick={() => handleChartChange('bar')}
                         >
                             Biểu đồ cột
                         </button>
                         <button
-                            className={`px-4 py-2 rounded-md ${currentChart === 'pie' ? 'bg-pink-500 text-white' : 'bg-gray-300 text-black'}`}
+                            className={`px-4 py-2 rounded-md ${currentChart === 'pie' ? 'bg-[#01adf1] text-white' : 'bg-gray-300 text-black'}`}
                             onClick={() => handleChartChange('pie')}
                         >
                             Biểu đồ hình tròn

@@ -1,13 +1,15 @@
 import { useContext } from "react";
 import Chart from "./Analysis/Chart";
 import { AuthUserContext } from "../hooks/useContext/AuthContext";
+import slideImage from "../assets/images/slide.png"
+
 const AnalysisBudget = () => {
     const { user } = useContext(AuthUserContext)
     return (
         <>
             {user.length === 0 ? (
                 <>
-                <img className="rounded-[10px]" src="https://homepage.momocdn.net/blogscontents/momo-upload-api-231229093948-638394395889774784.jpg" alt="" />
+                <img className="rounded-[10px]" src={slideImage} alt="" />
             </>
             ) : (
                 <>

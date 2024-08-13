@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import spendingService from "../../services/spending/spendingService";
 import { showToastSuccess } from "../../config/toastConfig";
+import iconImageLogo from '../../assets/images/icon-logo.jpg'
 
 const UpdateSpending = (props) => {
-    const { idSpending, handleHideForm , subCategories , getDataSpending} = props;
+    const { idSpending, handleHideForm, subCategories, getDataSpending } = props;
     const [dataDetailSpending, setDataDetailSpending] = useState({
         moneySpending: 0,
         subCategoryId: "",
@@ -56,14 +57,16 @@ const UpdateSpending = (props) => {
 
     return (
         <>
-            <div className="bg-[rgb(228,228,228)] p-5 rounded-[5px]">
-                <div className="py-3 flex items-center">
+            <div className="fixed inset-0 cursor-pointer bg-black bg-opacity-50 z-50" onClick={() => handleHideForm(false)}></div>
+            <div className="z-50 fixed left-[30%] h-[550px] bg-[rgb(228,228,228)] p-5 pt-0 rounded-[5px]">
+                <div className="py-2 flex items-center">
                     <img
-                        className="w-[150px]"
-                        src="https://is.vnecdn.net/v992/33/13/01/4011333/assets/images/momo-doll.png"
+                        className="w-[100px]"
+                        style={{ borderRadius: '35px' }}
+                        src={iconImageLogo}
                         alt=""
                     />
-                    <span className="text-[20px]">Chỉnh Sửa Chi Tiêu</span>
+                    <span className="text-[20px] pl-1">Chỉnh Sửa Chi Tiêu</span>
                 </div>
                 <div className="bg-[#fff] shadow w-[500px] p-3 rounded-[5px]">
                     <div>
@@ -74,7 +77,7 @@ const UpdateSpending = (props) => {
                             onChange={handleChange}
                             type="number"
                             placeholder="Tạo mức giao dịch"
-                            className="block my-2 w-full p-2 rounded-[5px] border-2 border-slate-300 relative"
+                            className="block my-2 w-full h-9 p-2 rounded-[5px] border-2 border-slate-300 relative"
                         />
                     </div>
                     <div>
@@ -82,7 +85,7 @@ const UpdateSpending = (props) => {
                         <select
                             name="subCategoryId"
                             value={dataDetailSpending.subCategoryId}
-                            className="block w-full p-2 border-2 border-slate-300 rounded-[5px] my-2"
+                            className="block w-full h-9 p-2 border-2 border-slate-300 rounded-[5px] my-2"
                             onChange={handleChange}
                         >
                             <option value="">Chọn danh mục</option>
@@ -99,7 +102,7 @@ const UpdateSpending = (props) => {
                             name="dateSpending"
                             value={dataDetailSpending.dateSpending}
                             type="date"
-                            className="block my-2 w-full p-2 rounded-[5px] border-2 border-slate-300 relative"
+                            className="block my-2 w-full h-9 p-2 rounded-[5px] border-2 border-slate-300 relative"
                             onChange={handleChange}
                         />
                     </div>
@@ -110,14 +113,14 @@ const UpdateSpending = (props) => {
                             value={dataDetailSpending.note}
                             type="text"
                             placeholder="Ghi chú cho giao dịch"
-                            className="block my-2 w-full p-2 rounded-[5px] border-2 border-slate-300 relative"
+                            className="block my-2 w-full h-9 p-2 rounded-[5px] border-2 border-slate-300 relative"
                             onChange={handleChange}
                         />
                     </div>
                     <div className="flex justify-center mt-3">
                         <button
                             onClick={() => handleEditSpending()}
-                               className="bg-[#CF3D84] w-full rounded-[5px] p-2 text-[#fff]"
+                            className="bg-[#01adf1] w-full rounded-[5px] p-2 text-[#fff]"
                         >
                             Xác nhận
                         </button>
@@ -125,7 +128,7 @@ const UpdateSpending = (props) => {
                     <div className="flex justify-center mt-3">
                         <button
                             onClick={() => handleHideForm(false)}
-                            className="bg-[#CF3D84] w-full rounded-[5px] p-2 text-[#fff]"
+                            className="bg-red-500 w-full rounded-[5px] p-2 text-[#fff]"
                         >
                             Hủy
                         </button>

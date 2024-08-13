@@ -4,11 +4,13 @@ import { AuthUserContext } from "../../hooks/useContext/AuthContext";
 import subCategoriesService from "../../services/subCategories/subCategoriesService";
 import budgetService from '../../services/budget/budgetService'
 import { formatCurrency } from "../../config/formatCurrency";
+import iconImageLogo from '../../assets/images/icon-logo.jpg'
+
 const CreateBudget = (props) => {
   const [bubget, setBubget] = useState(0);
   const [bubgetCategories, setBubgetCategories] = useState(0);
   const [totalMoneySpending, setTotalMoneySpending] = useState(0)
-  const [overdue,setOverdue] = useState(0)
+  const [overdue, setOverdue] = useState(0)
 
   const { user } = useContext(AuthUserContext);
   const { handleHideForm, detailSubcategories } = props
@@ -44,27 +46,30 @@ const CreateBudget = (props) => {
     setTotalMoneySpending(total)
     if (total > bubgetCategories) {
       setOverdue(total - bubgetCategories);
-  } else {
-      setOverdue(0); 
-  }
-  }, [detailSubcategories,bubgetCategories]);
+    } else {
+      setOverdue(0);
+    }
+  }, [detailSubcategories, bubgetCategories]);
 
 
 
   return (
     <>
-      <div className="bg-[rgb(228,228,228)] p-5 rounded-[5px]">
-        <div className="py-3">
+    <div className="fixed inset-0 cursor-pointer bg-black bg-opacity-50 z-50" onClick={() => handleHideForm(false)}></div>
+      <div className="z-50 fixed top-[30px] left-[30vw] bg-[rgb(228,228,228)] p-5 rounded-[5px]">
+        <div className="flex w-[500px] mx-auto py-3 gap-3">
           <img
-            className="w-[200px]"
-            src="https://is.vnecdn.net/v992/33/13/01/4011333/assets/images/momo-doll.png"
+            className="w-[100px] rounded-3xl"
+            src={iconImageLogo}
             alt=""
           />
-          <span className="text-[20px] block">Đặt hạn mức chi tiêu</span>
-          <span className="text-[16px] block">Bạn sẽ được thông báo khi chi tiêu danh mục đạt tới giới hạn</span>
+          <div style={{ width: '70%' }}>
+            <span className="text-[20px] font-bold block">Đặt hạn mức chi tiêu</span>
+            <span className="text-[16px] block">Bạn sẽ được thông báo khi chi tiêu danh mục đạt tới giới hạn</span>
+          </div>
 
         </div>
-        <div className="bg-[#fff] shadow w-[500px] p-3 rounded-[5px]">
+        <div className="bg-[#fff] shadow w-[500px] mx-auto p-3 rounded-[5px]">
           <div className="my-2">
             <span className="block">Danh mục</span>
             <span className="text-[20px] font-semibold block">{detailSubcategories?.name}</span>
@@ -76,7 +81,7 @@ const CreateBudget = (props) => {
               <span>
                 {totalMoneySpending !== 0 && (
                   <>
-                    {totalMoneySpending > bubgetCategories ? (<span className="text-red-500 text-[13px] font-bold">Vượt Quá { formatCurrency(overdue)}</span>) : null}
+                    {totalMoneySpending > bubgetCategories ? (<span className="text-red-500 text-[13px] font-bold">Vượt Quá {formatCurrency(overdue)}</span>) : null}
                   </>
                 )}
               </span>
@@ -96,7 +101,7 @@ const CreateBudget = (props) => {
               onClick={handleCreateBudget}
               disabled={bubget === 0}
               className={`${bubget
-                ? "bg-[#CF3D84] text-[#fff]"
+                ? "bg-[#01adf1] text-[#fff]"
                 : "bg-slate-200"
                 } w-full rounded-[5px] p-2 text-[#b4b4b4] duration-300`}
             >
